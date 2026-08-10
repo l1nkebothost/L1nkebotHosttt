@@ -1011,15 +1011,10 @@ async def handle_all_messages(update: Update, context: ContextTypes.DEFAULT_TYPE
     user_id = str(update.effective_user.id)
     ensure_user_exists(user_id, update.effective_user.full_name, update.effective_user.username)
 
-# ==================== БЕСКОНЕЧНЫЙ ЦИКЛ ЗАПУСКА (ДЛЯ ХОСТИНГА) ====================
+# ==================== ЗАПУСК БОТА (БЕЗ ЦИКЛА) ====================
 if __name__ == '__main__':
-    while True:
-        try:
-            print("🚀 Запуск бота...")
-            asyncio.run(run_bot())
-        except KeyboardInterrupt:
-            logger.info("Бот остановлен вручную")
-            break
-        except Exception as e:
-            logger.error(f"⚠️ Бот упал с ошибкой: {e}. Перезапуск через 5 секунд...")
-            time.sleep(5)
+    try:
+        print("🚀 Бот запускается...")
+        asyncio.run(run_bot())
+    except KeyboardInterrupt:
+        print("Бот остановлен.")
